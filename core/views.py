@@ -44,9 +44,16 @@ class UserListView(generics.ListAPIView):
     search_fields = ['username', 'email', 'first_name', 'last_name']
     filterset_class = UserFilter
 
-def create_superuser(request):
+from django.http import JsonResponse
+
+def create_superuser_view(request):
     User = get_user_model()
-    if not User.objects.filter(username='admin').exists():
-        User.objects.create_superuser('admin', 'admin@example.com', 'Django@16')
-        return HttpResponse("✅ Superuser created.")
-    return HttpResponse("ℹ️ Superuser already exists.")
+    if not User.objects.filter(username="admin").exists():
+        User.objects.create_superuser(
+            username="admin",
+            email="admin@example.com",
+            password="admin123"
+        )
+        return JsonResponse({"status": "Superuser created"})
+    else:
+        return JsonResponse({"status": "Superuser already exists"})
