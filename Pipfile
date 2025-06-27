@@ -1,0 +1,23 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+mysqlclient = "*"
+djangorestframework-simplejwt = "*"
+celery = "*"
+redis = "*"
+django-celery-beat = "*"
+django = "*"
+django-debug-toolbar = "*"
+django-cors-headers = "*"
+djangorestframework = "*"
+djoser = "*"
+django-filter = "*"
+openpyxl = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.12"

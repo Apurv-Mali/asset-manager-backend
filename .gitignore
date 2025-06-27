@@ -1,0 +1,32 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments (just in case)
+.env
+.venv/
+env/
+venv/
+
+# Pipenv
+Pipfile.lock
+
+# Django stuff
+*.log
+*.sqlite3
+/staticfiles/
+/media/
+
+# IDE/editor
+.vscode/
+.idea/
+
+# System
+.DS_Store
+Thumbs.db
+
+# Coverage
+htmlcov/
+.coverage
+coverage.xml
