@@ -57,3 +57,14 @@ def create_superuser_view(request):
         return JsonResponse({"status": "Superuser created"})
     else:
         return JsonResponse({"status": "Superuser already exists"})
+    
+from django.db import connection
+
+def check_db_view(request):
+    try:
+        cursor = connection.cursor()
+        cursor.execute("SELECT 1")  # simple test query
+        return HttpResponse("Database connection successful ✅")
+    except Exception as e:
+        print("DB connection error:", e)
+        return HttpResponse(f"DB error: {e}", status=500)
