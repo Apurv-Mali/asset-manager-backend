@@ -20,7 +20,7 @@ staticfiles/
 secrets.json
 
 # Pipenv
-Pipfile.lock
+# Pipfile.lock
 
 # VSCode or other IDEs
 .vscode/
