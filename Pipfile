@@ -16,6 +16,8 @@ djangorestframework = "*"
 djoser = "*"
 django-filter = "*"
 openpyxl = "*"
+python-dotenv = "*"
+dj-database-url = "*"
 
 [dev-packages]
 

@@ -1,32 +1,31 @@
-# Byte-compiled / optimized / DLL files
+# Python
 __pycache__/
 *.py[cod]
-*$py.class
+*.sqlite3
 
-# Virtual environments (just in case)
+# Django
+*.log
+db.sqlite3
+*.pot
+*.pyc
+*.pyo
+*.pyd
+media/
+staticfiles/
+
+# Env & Secrets
 .env
-.venv/
-env/
-venv/
+.env.*
+.envrc
+secrets.json
 
 # Pipenv
 Pipfile.lock
 
-# Django stuff
-*.log
-*.sqlite3
-/staticfiles/
-/media/
-
-# IDE/editor
+# VSCode or other IDEs
 .vscode/
 .idea/
 
-# System
-.DS_Store
-Thumbs.db
-
-# Coverage
-htmlcov/
-.coverage
-coverage.xml
+# Migrations (optional if you want clean history)
+**/migrations/*.py
+!**/migrations/__init__.py
