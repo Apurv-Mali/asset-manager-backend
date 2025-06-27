@@ -14,9 +14,6 @@ from .models import User
 from .serializers import UserSerializer
 from .filters import UserFilter
 from django.http import HttpResponse
-from django.http import JsonResponse
-from django.db import connection
-from django.views import View
 
 class DeleteUserView(APIView):
     permission_classes = [IsAuthenticated]
@@ -47,6 +44,7 @@ class UserListView(generics.ListAPIView):
     search_fields = ['username', 'email', 'first_name', 'last_name']
     filterset_class = UserFilter
 
+from django.http import JsonResponse
 
 def create_superuser_view(request):
     User = get_user_model()
@@ -60,12 +58,13 @@ def create_superuser_view(request):
     else:
         return JsonResponse({"status": "Superuser already exists"})
     
+from django.db import connection
 
-
-class check_db_view(View):
-    def get(self, request):
-        try:
-            connection.ensure_connection()
-            return JsonResponse({"status": "connected"})
-        except Exception as e:
-            return JsonResponse({"error": str(e)})
+def check_db_view(request):
+    try:
+        cursor = connection.cursor()
+        cursor.execute("SELECT 1")  # simple test query
+        return HttpResponse("Database connection successful ✅")
+    except Exception as e:
+        print("DB connection error:", e)
+        return HttpResponse(f"DB error: {e}", status=500)
