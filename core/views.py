@@ -14,6 +14,8 @@ from .models import User
 from .serializers import UserSerializer
 from .filters import UserFilter
 from django.http import HttpResponse
+from django.core.management import call_command
+from django.views import View
 
 class DeleteUserView(APIView):
     permission_classes = [IsAuthenticated]
@@ -46,17 +48,17 @@ class UserListView(generics.ListAPIView):
 
 from django.http import JsonResponse
 
-def create_superuser_view(request):
-    User = get_user_model()
-    if not User.objects.filter(username="admin").exists():
-        User.objects.create_superuser(
-            username="admin",
-            email="admin@example.com",
-            password="admin123"
-        )
-        return JsonResponse({"status": "Superuser created"})
-    else:
-        return JsonResponse({"status": "Superuser already exists"})
+class CreateSuperuserView(View):
+    def get(self, request):
+        User = get_user_model()
+        if not User.objects.filter(username='Apurv@0599').exists():
+            User.objects.create_superuser(
+                username='Apurv@0599',
+                email='admin@example.com',
+                password='Django@16'
+            )
+            return JsonResponse({'message': 'Superuser created ✅'})
+        return JsonResponse({'message': 'Superuser already exists'})
     
 from django.db import connection
 
@@ -68,3 +70,11 @@ def check_db_view(request):
     except Exception as e:
         print("DB connection error:", e)
         return HttpResponse(f"DB error: {e}", status=500)
+    
+class ApplyMigrationsView(View):
+    def get(self, request):
+        try:
+            call_command('migrate')
+            return JsonResponse({'message': 'Migrations applied successfully ✅'})
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
