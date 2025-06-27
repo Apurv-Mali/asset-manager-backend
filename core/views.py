@@ -13,6 +13,7 @@ from rest_framework.views import APIView
 from .models import User 
 from .serializers import UserSerializer
 from .filters import UserFilter
+from django.http import HttpResponse
 
 class DeleteUserView(APIView):
     permission_classes = [IsAuthenticated]
@@ -42,3 +43,10 @@ class UserListView(generics.ListAPIView):
     filter_backends = [SearchFilter, DjangoFilterBackend]
     search_fields = ['username', 'email', 'first_name', 'last_name']
     filterset_class = UserFilter
+
+def create_superuser(request):
+    User = get_user_model()
+    if not User.objects.filter(username='admin').exists():
+        User.objects.create_superuser('admin', 'admin@example.com', 'Django@16')
+        return HttpResponse("✅ Superuser created.")
+    return HttpResponse("ℹ️ Superuser already exists.")
