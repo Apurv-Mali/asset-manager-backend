@@ -18,6 +18,7 @@ django-filter = "*"
 openpyxl = "*"
 python-dotenv = "*"
 dj-database-url = "*"
+gunicorn = "*"
 
 [dev-packages]
 
